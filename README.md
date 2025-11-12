@@ -102,7 +102,7 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 
 ### Deployment Flow
 
-```
+```F
 1. Master Account Setup
    ├─ Create ECR repositories
    ├─ Build Docker images (MCP Server, Agent, UI)
@@ -142,7 +142,7 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 
 ## 📚 Documentation
 
-**Workshop documentation is available at:** https://kpullagu.github.io/aws-coveo-workshop-stackset/
+**Workshop documentation is available at:** https://coveo-labs.github.io/aws-coveo-workshop-stackset/
 
 The documentation includes:
 - 🏠 **Home** - Workshop overview and prerequisites
@@ -776,7 +776,7 @@ aws ecr batch-delete-image \
 ## 📞 Support
 
 For issues or questions:
-- Review [Workshop Documentation](https://kpullagu.github.io/aws-coveo-workshop-stackset/)
+- Review [Workshop Documentation](https://coveo-labs.github.io/aws-coveo-workshop-stackset/)
 - Open an issue on GitHub
 
 ---
