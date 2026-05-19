@@ -102,7 +102,7 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 
 ### Deployment Flow
 
-```
+```F
 1. Master Account Setup
    ├─ Create ECR repositories
    ├─ Build Docker images (Agent and UI)
