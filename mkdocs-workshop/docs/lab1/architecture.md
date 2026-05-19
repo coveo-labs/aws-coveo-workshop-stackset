@@ -10,7 +10,7 @@ This page provides detailed architectural information for the Direct Coveo Integ
 %%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e8f5e9','primaryTextColor':'#000','primaryBorderColor':'#4caf50','lineColor':'#4caf50','secondaryColor':'#e3f2fd','tertiaryColor':'#fff3e0'}}}%%
 graph TB
     subgraph Frontend["🖥️ Frontend Layer"]
-        UI[React Search UI<br/>App Runner<br/>Port 3003]
+        UI[React Search UI<br/>ECS Express<br/>Port 3003]
     end
     
     subgraph API["🔐 API Layer"]
@@ -59,7 +59,7 @@ graph TB
 
 #### Frontend Layer
 
-- **React Search UI**: Single-page application hosted on AWS App Runner
+- **React Search UI**: Single-page application hosted on Amazon ECS Express Mode
 - **Authentication**: Cognito-based user authentication with JWT tokens
 - **Responsive Design**: Works on desktop and mobile devices
 - **Real-time Updates**: Dynamic result rendering without page refresh
@@ -125,7 +125,7 @@ sequenceDiagram
     participant COVEO as Coveo Answer API
     
     User->>UI: Enter question
-    UI->>AG: POST /answer
+    UI->>AG: POST /api/answer
     AG->>AP: Invoke Lambda
     AP->>AP: Build answer request
     AP->>COVEO: Answer API call
@@ -159,7 +159,7 @@ sequenceDiagram
     participant COVEO as Coveo Passages API
     
     User->>UI: Enter query
-    UI->>AG: POST /passages
+    UI->>AG: POST /api/passages
     AG->>PP: Invoke Lambda
     PP->>PP: Build passages request
     PP->>COVEO: Passages API call
@@ -193,7 +193,7 @@ sequenceDiagram
     
     User->>UI: Enter search query
     UI->>UI: Validate input
-    UI->>AG: POST /search
+    UI->>AG: POST /api/search
     AG->>AG: Authenticate JWT token
     AG->>SP: Invoke Lambda
     SP->>SP: Build Coveo request
@@ -277,9 +277,11 @@ Each Lambda function uses these environment variables:
 | Variable | Purpose | Example Value |
 |----------|---------|---------------|
 | `COVEO_ORG_ID` | Coveo organization identifier | `workshoporg123` |
-| `COVEO_API_KEY` | API authentication token | `xx-xxxxxxxx-xxxx-xxxx` |
-| `COVEO_SEARCH_HUB` | Analytics tracking identifier | `workshop` |
-| `COVEO_PIPELINE` | Query processing pipeline | `default` |
+| `COVEO_SEARCH_API_KEY` | API authentication token | `xx-xxxxxxxx-xxxx-xxxx` |
+| `COVEO_PLATFORM_URL` | Coveo Platform base URL | `https://platform.cloud.coveo.com` |
+| `COVEO_SEARCH_HUB` | Analytics tracking identifier | `aws-workshop` |
+| `COVEO_SEARCH_PIPELINE` | Query processing pipeline | `aws-workshop-pipeline` |
+| `COVEO_ANSWER_CONFIG_ID` | Answer API configuration ID | `xxxx-xxxx-xxxx` |
 
 ### Error Handling
 
@@ -333,13 +335,13 @@ except Exception as e:
 - **API Gateway**: Handles thousands of requests per second
 - **Coveo Platform**: Enterprise-grade scalability and availability
 - **Serverless Design**: Scales as the load increases, minimal costs
-- **Seperation of Concern**: Front end decoupled from backend
+- **Separation of Concern**: Front end decoupled from backend
 
 ### Cost Optimization
 
 - **Lambda**: Pay per request and execution time (~$0.20 per million requests)
 - **API Gateway**: Pay per API call (~$1.00 per million requests)
-- **App Runner**: Pay for running time and requests (~$0.064 per vCPU-hour)
+- **ECS Express Mode**: Pay for underlying Fargate, ALB, logs, and data transfer
 - **Coveo**: Usage-based pricing for API calls
 
 ---
@@ -437,6 +439,6 @@ graph LR
 - [AWS Lambda](https://docs.aws.amazon.com/lambda/)
 - [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/)
 - [Amazon Cognito](https://docs.aws.amazon.com/cognito/)
-- [AWS App Runner](https://docs.aws.amazon.com/apprunner/)
+- [Amazon ECS Express Mode](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/express-service-overview.html)
 
 ---
