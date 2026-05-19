@@ -87,9 +87,9 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 │                                                                     │
 │  ┌──────────────────────────────────────────────────────────────┐   │
 │  │ Layer 3: AI Services                                         │   │
-│  │  • Bedrock Agent                                             │   │
-│  │  • Bedrock AgentCore Agent Runtime                           │   │
-│  │  • AgentCore Memory + Hosted MCP configuration               │   │
+│  │  • Classic Bedrock Agent (action group + passage tool)        │   │
+│  │  • Bedrock AgentCore Runtime (Strands + Hosted MCP)           │   │
+│  │  • AgentCore Memory + Coveo Hosted MCP configuration          │   │
 │  └──────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌──────────────────────────────────────────────────────────────┐   │
@@ -102,7 +102,7 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 
 ### Deployment Flow
 
-```F
+```
 1. Master Account Setup
    ├─ Create ECR repositories
    ├─ Build Docker images (Agent and UI)
@@ -122,8 +122,8 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
    └─ Configure IAM roles
 
 4. Layer 3 Deployment (AI Services)
-   ├─ Deploy Bedrock Agent and AgentCore Runtime
-   ├─ Connect AgentCore Runtime to Coveo Hosted MCP
+   ├─ Deploy classic Bedrock Agent (with Coveo passage tool)
+   ├─ Deploy AgentCore Runtime (Strands + Coveo Hosted MCP)
    ├─ Seed SSM parameters
    └─ Enable Bedrock logging
 
@@ -401,8 +401,8 @@ aws-coveo-workshop-stackset/
 │   ├── 📁 answering_proxy/                    # Coveo answering proxy
 │   ├── 📁 query_suggest_proxy/                # Query suggestions proxy
 │   ├── 📁 html_proxy/                         # HTML content proxy
-│   ├── 📁 bedrock_agent_chat/                 # Bedrock Agent chat handler
-│   └── 📁 coveo_passage_tool_py/              # Bedrock Agent passage tool
+│   ├── 📁 bedrock_agent_chat/                 # Classic Bedrock Agent chat handler (multi-turn, memory)
+│   └── 📁 coveo_passage_tool_py/              # Classic Bedrock Agent action group: Coveo passage retrieval
 │
 ├── 📁 mkdocs-workshop/                        # Workshop Documentation (MkDocs)
 │   ├── mkdocs.yml                             # MkDocs configuration
@@ -411,7 +411,7 @@ aws-coveo-workshop-stackset/
 │       ├── index.md                           # Home page
 │       ├── 📁 lab1/                           # Lab 1: Direct Coveo API
 │       ├── 📁 lab2/                           # Lab 2: AgentCore + Coveo Hosted MCP Chatbot
-│       ├── 📁 lab3/                           # Lab 3: AgentCore + Hosted MCP
+│       ├── 📁 lab3/                           # Lab 3: Native Coveo Search Agent with Headless
 │       └── 📁 resources/                      # Architecture & references
 │
 ├── .dockerignore                              # Docker ignore rules
@@ -526,9 +526,9 @@ bash scripts/stacksets/11-deploy-layer2-core.sh
 ```bash
 bash scripts/stacksets/12-deploy-layer3-ai-services.sh
 ```
-- Deploys Bedrock Agent
-- Deploys AgentCore MCP Runtime
-- Deploys AgentCore Agent Runtime
+- Deploys classic Bedrock Agent with Coveo Passage Retrieval tool (action group)
+- Deploys AgentCore MCP Runtime (Coveo Hosted MCP integration)
+- Deploys AgentCore Agent Runtime (Strands-based, memory-enabled)
 - Creates SSM parameters for runtimes
 
 **Step 10: Seed Agent SSM Parameters** (2 minutes)
@@ -597,10 +597,6 @@ The script deploys to multiple accounts in parallel:
 - **StackSet Operations** - Deploys to all accounts simultaneously
 - **Max Concurrent** - 10 accounts at a time (configurable)
 - **Failure Tolerance** - Continues if 5 accounts fail (configurable)
-
----
-
-
 
 ---
 
