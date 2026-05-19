@@ -410,7 +410,7 @@ aws-coveo-workshop-stackset/
 │   └── 📁 docs/                               # Markdown lab content
 │       ├── index.md                           # Home page
 │       ├── 📁 lab1/                           # Lab 1: Direct Coveo API
-│       ├── 📁 lab2/                           # Lab 2: Bedrock Agent + Passage Tool
+│       ├── 📁 lab2/                           # Lab 2: AgentCore + Coveo Hosted MCP Chatbot
 │       ├── 📁 lab3/                           # Lab 3: AgentCore + Hosted MCP
 │       └── 📁 resources/                      # Architecture & references
 │
