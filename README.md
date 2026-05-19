@@ -761,7 +761,7 @@ aws ecr batch-delete-image \
 ## 📞 Support
 
 For issues or questions:
-- Review [Workshop Documentation](https://kpullagu.github.io/aws-coveo-workshop-stackset/)
+- Review [Workshop Documentation](https://coveo-labs.github.io/aws-coveo-workshop-stackset/)
 - Open an issue on GitHub
 
 ---

@@ -118,6 +118,11 @@ logs/
 Thumbs.db
 .DS_Store
 
+# Copilot/AI/skills folders (not required for core program)
+.agents/
+.codex/
+skills/
+
 # Backup files
 *.backup
 backup/
