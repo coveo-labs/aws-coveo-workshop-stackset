@@ -43,7 +43,7 @@ mkdocs-workshop/
 
 The site is automatically deployed to GitHub Pages on every push to `main`:
 
-**https://kpullagu.github.io/aws-coveo-workshop-stackset/**
+**https://coveo-labs.github.io/aws-coveo-workshop-stackset/**
 
 ## Local Development
 

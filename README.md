@@ -142,7 +142,7 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 
 ## 📚 Documentation
 
-**Workshop documentation is available at:** https://kpullagu.github.io/aws-coveo-workshop-stackset/
+**Workshop documentation is available at:** https://coveo-labs.github.io/aws-coveo-workshop-stackset/
 
 The documentation includes:
 - 🏠 **Home** - Workshop overview, objectives, and recommended schedule
@@ -252,7 +252,7 @@ choco install jq
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/kpullagu/aws-coveo-workshop-stackset.git
+git clone https://github.com/coveo-labs/aws-coveo-workshop-stackset.git
 cd aws-coveo-workshop-stackset
 ```
 
@@ -770,7 +770,7 @@ aws ecr batch-delete-image \
 ## 📞 Support
 
 For issues or questions:
-- Review [Workshop Documentation](https://kpullagu.github.io/aws-coveo-workshop-stackset/)
+- Review [Workshop Documentation](https://coveo-labs.github.io/aws-coveo-workshop-stackset/)
 - Open an issue on GitHub
 
 ---
