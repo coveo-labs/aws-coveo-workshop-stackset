@@ -340,7 +340,8 @@ table {
 /* Dark-mode styling for architecture images with black lines */
 [data-md-color-scheme="slate"] .md-typeset img[src*="Workshop-Architecture.png"],
 [data-md-color-scheme="slate"] .md-typeset img[src*="BedrockAgentCore-CoveoMCP.png"],
-[data-md-color-scheme="slate"] .md-typeset img[src*="BedrockAgent-CoveoPassageTool.png"] {
+[data-md-color-scheme="slate"] .md-typeset img[src*="BedrockAgent-CoveoPassageTool.png"],
+[data-md-color-scheme="slate"] .md-typeset img[src*="DirectCoveoAPI.png"] {
     background: #ffffff !important;
     padding: 0.75rem;
     border-radius: 10px;
