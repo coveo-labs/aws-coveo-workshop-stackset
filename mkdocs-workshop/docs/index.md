@@ -67,3 +67,4 @@ Understand when to use direct Coveo APIs, when to use AWS Bedrock AgentCore with
     Start Lab 1
   </a>
 </div>
+# Rebuilt with dark-mode image visibility

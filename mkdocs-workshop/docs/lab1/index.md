@@ -59,7 +59,6 @@ graph TB
 ## 🔄 Pattern 1 Sequence Diagram
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e8f5e9','primaryTextColor':'#000','primaryBorderColor':'#4caf50','lineColor':'#4caf50','secondaryColor':'#fff3e0','tertiaryColor':'#e3f2fd'}}}%%
 sequenceDiagram
     participant User
     participant UI as Search UI
