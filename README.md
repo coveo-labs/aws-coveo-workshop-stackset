@@ -87,9 +87,9 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 │                                                                     │
 │  ┌──────────────────────────────────────────────────────────────┐   │
 │  │ Layer 3: AI Services                                         │   │
-│  │  • Bedrock Agent                                             │   │
-│  │  • Bedrock AgentCore Agent Runtime                           │   │
-│  │  • AgentCore Memory + Hosted MCP configuration               │   │
+│  │  • Classic Bedrock Agent (action group + passage tool)        │   │
+│  │  • Bedrock AgentCore Runtime (Strands + Hosted MCP)           │   │
+│  │  • AgentCore Memory + Coveo Hosted MCP configuration          │   │
 │  └──────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌──────────────────────────────────────────────────────────────┐   │
@@ -122,8 +122,8 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
    └─ Configure IAM roles
 
 4. Layer 3 Deployment (AI Services)
-   ├─ Deploy Bedrock Agent and AgentCore Runtime
-   ├─ Connect AgentCore Runtime to Coveo Hosted MCP
+   ├─ Deploy classic Bedrock Agent (with Coveo passage tool)
+   ├─ Deploy AgentCore Runtime (Strands + Coveo Hosted MCP)
    ├─ Seed SSM parameters
    └─ Enable Bedrock logging
 
@@ -142,14 +142,13 @@ This workshop deploys a complete AI-powered search solution across multiple AWS 
 
 ## 📚 Documentation
 
-**Workshop documentation is available at:** https://.github.io/aws-coveo-workshop-stackset/
+**Workshop documentation is available at:** https://kpullagu.github.io/aws-coveo-workshop-stackset/
 
 The documentation includes:
-- 🏠 **Home** - Workshop overview and prerequisites
-- 🔍 **Lab 1** - Direct Coveo API Integration
-- 🤖 **Lab 2** - Bedrock Agent with Coveo Passage Retrieval Tool
-- ⚡ **Lab 3** - Bedrock AgentCore with Coveo Hosted MCP
-- 💬 **Lab 4** - Multi-Turn Conversations and Use Cases
+- 🏠 **Home** - Workshop overview, objectives, and recommended schedule
+- 🔍 **Lab 1** - Environment Check + Coveo Discovery (Direct Coveo API — Search, Passages, Answers)
+- 🤖 **Lab 2** - AgentCore + Coveo Hosted MCP Chatbot (AWS Bedrock AgentCore Runtime + memory-enabled sessions)
+- ⚡ **Lab 3** - Native Coveo Search Agent with Headless (Coveo Headless + Coveo Search Agent, no custom agent runtime)
 - 📖 **Resources** - Architecture diagrams, code references, and additional reading
 
 ### Building Documentation Locally
@@ -178,6 +177,7 @@ For more details, see [mkdocs-workshop/README.md](mkdocs-workshop/README.md).
 | **jq** | 1.6+ | JSON processing in scripts |
 | **Bash** | 4.x+ | Running deployment scripts |
 | **Git** | 2.x+ | Version control |
+| **Node.js** | 24.x+ | Frontend build (required by UI) |
 
 ### AWS Requirements
 
@@ -252,8 +252,8 @@ choco install jq
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/your-org/aws-cove-workshop-stackset.git
-cd aws-coveo-workshop
+git clone https://github.com/kpullagu/aws-coveo-workshop-stackset.git
+cd aws-coveo-workshop-stackset
 ```
 
 ### Step 2: Configure Environment
@@ -333,11 +333,12 @@ Next Steps:
 ## 📁 Project Structure
 
 ```
-aws-coveo-workshop/
+aws-coveo-workshop-stackset/
 ├── 📁 cfn/                                    # CloudFormation Templates
 │   └── 📁 stacksets/                          # StackSet Templates
 │       ├── stackset-1-prerequisites.yml       # Layer 1: S3, ECR, IAM
-│       ├── stackset-2-core.yml                # Layer 2: Lambda, API Gateway
+│       ├── stackset-2-core.yml                # Layer 2: Lambda, API Gateway, Cognito
+│       ├── stackset-2-core-part1.yml          # Layer 2 (part 1 split)
 │       ├── stackset-3-ai-services.yml         # Layer 3: Bedrock + AgentCore + Hosted MCP
 │       └── stackset-4-ui.yml                  # Layer 4: ECS Express UI
 │
@@ -347,8 +348,8 @@ aws-coveo-workshop/
 │   ├── destroy-all-stacksets-v2.sh           # Complete cleanup
 │   │
 │   ├── 01-setup-master-ecr.sh                # Setup master ECR
-│   ├── 02b-build-push-agent-image.sh         # Build Agent image
-│   ├── 03-build-push-ui-image.sh             # Build UI image
+│   ├── 02b-build-push-agent-image.sh         # Build Agent Docker image
+│   ├── 03-build-push-ui-image.sh             # Build UI Docker image
 │   ├── 04-create-shared-lambda-layer.sh      # Create Lambda Layer
 │   ├── 05-package-lambdas.sh                 # Package Lambda functions
 │   ├── 06-setup-s3-replication-v2.sh         # Setup S3 replication
@@ -370,49 +371,61 @@ aws-coveo-workshop/
 │   ├── update-ecr-repo-policy.sh             # Update ECR policies
 │   └── fix-lambda-layer-permissions.sh       # Fix layer permissions
 │
-├── 📁 coveo-agent/                            # AgentCore Agent
-│   ├── app.py                                 # Main agent application
+├── 📁 coveo-agent/                            # Bedrock AgentCore Agent
+│   ├── app.py                                 # Main agent application (Strands + AgentCore)
 │   ├── mcp_adapter.py                         # Hosted MCP client adapter
 │   ├── Dockerfile                             # Agent container
-│   └── requirements.txt                       # Python dependencies
+│   ├── requirements.txt                       # Python dependencies
+│   └── 📁 memory/                             # AgentCore Memory helpers
+│       ├── __init__.py
+│       └── session.py                         # Session memory manager
 │
 ├── 📁 frontend/                               # React UI + Express BFF
-│   ├── 📁 client/                             # React application
+│   ├── 📁 client/                             # React application (Vite + JSX)
 │   │   ├── 📁 src/
 │   │   │   ├── 📁 components/                 # React components
+│   │   │   ├── 📁 hooks/                      # Custom React hooks
 │   │   │   ├── 📁 services/                   # API client
-│   │   │   ├── App.js                         # Main app
-│   │   │   └── index.js                       # Entry point
-│   │   └── package.json                       # React dependencies
+│   │   │   ├── App.jsx                        # Main app
+│   │   │   └── index.jsx                      # Entry point
+│   │   ├── vite.config.js                     # Vite build config
+│   │   └── package.json                       # React dependencies (@coveo/headless)
 │   ├── server.js                              # Express BFF
 │   ├── Dockerfile                             # Multi-stage build
-│   └── package.json                           # BFF dependencies
+│   └── package.json                           # BFF dependencies (Node >=24)
 │
 ├── 📁 lambdas/                                # Lambda Functions
-│   ├── 📁 agentcore_runtime_py/               # AgentCore handler
-│   ├── 📁 search_proxy/                       # Coveo search
-│   ├── 📁 passages_proxy/                     # Coveo passages
-│   ├── 📁 answering_proxy/                    # Coveo answering
-│   ├── 📁 query_suggest_proxy/                # Query suggestions
+│   ├── 📁 agentcore_runtime_py/               # Bedrock AgentCore invoke handler
+│   ├── 📁 search_proxy/                       # Coveo search proxy
+│   ├── 📁 passages_proxy/                     # Coveo passages proxy
+│   ├── 📁 answering_proxy/                    # Coveo answering proxy
+│   ├── 📁 query_suggest_proxy/                # Query suggestions proxy
 │   ├── 📁 html_proxy/                         # HTML content proxy
-│   ├── 📁 bedrock_agent_chat/                 # Bedrock Agent chat
-│   └── 📁 coveo_passage_tool_py/              # Bedrock Agent tool
+│   ├── 📁 bedrock_agent_chat/                 # Classic Bedrock Agent chat handler (multi-turn, memory)
+│   └── 📁 coveo_passage_tool_py/              # Classic Bedrock Agent action group: Coveo passage retrieval
 │
-├── 📁 config/                                 # Configuration
-│   ├── env.py                                 # Python env loader
-│   └── env.schema.json                        # Environment schema
-│
+├── 📁 mkdocs-workshop/                        # Workshop Documentation (MkDocs)
+│   ├── mkdocs.yml                             # MkDocs configuration
+│   ├── requirements.txt                       # Docs dependencies
+│   └── 📁 docs/                               # Markdown lab content
+│       ├── index.md                           # Home page
+│       ├── 📁 lab1/                           # Lab 1: Direct Coveo API
+│       ├── 📁 lab2/                           # Lab 2: AgentCore + Coveo Hosted MCP Chatbot
+│       ├── 📁 lab3/                           # Lab 3: Native Coveo Search Agent with Headless
+│       └── 📁 resources/                      # Architecture & references
 │
 ├── .dockerignore                              # Docker ignore rules
-├── .env.stacksets.example                     # Config template ✅ COMMIT
-├── .env.stacksets                             # Your config ❌ GITIGNORED
+├── .env.stacksets.example                     # StackSets config template ✅ COMMIT
+├── .env.stacksets                             # Your StackSets config ❌ GITIGNORED
 ├── .env.example                               # Frontend config template ✅ COMMIT
 ├── .env.template                              # Environment template
 ├── .env                                       # Frontend config ❌ GITIGNORED
 ├── .gitignore                                 # Git ignore rules
+├── HOSTED_MCP_WORKSHOP_REFRESH_BLUEPRINT.md   # Hosted MCP refresh guide
+├── SETUP_GUIDE.md                             # Detailed setup instructions
+├── workshop-deployment-info.csv               # Generated deployment info
 ├── LICENSE                                    # MIT License
-├── README.md                                  # This file
-└── SETUP_GUIDE.md                             # Setup instructions
+└── README.md                                  # This file
 ```
 
 ### Key Directories
@@ -421,10 +434,10 @@ aws-coveo-workshop/
 |-----------|---------|
 | `cfn/stacksets/` | CloudFormation StackSet templates for multi-account deployment |
 | `scripts/stacksets/` | Bash scripts for deployment, configuration, and cleanup |
-| `coveo-agent/` | Bedrock AgentCore runtime application with Hosted MCP integration |
-| `frontend/` | React UI with Express BFF (Node.js) |
-| `lambdas/` | AWS Lambda functions (Python) |
-| `docs/` | Comprehensive documentation |
+| `coveo-agent/` | Bedrock AgentCore agent application (Strands + Hosted MCP integration) |
+| `frontend/` | React UI (Vite + `@coveo/headless`) with Express BFF (Node.js >=24) |
+| `lambdas/` | AWS Lambda functions (Python) — search, passages, answering, AgentCore handler |
+| `mkdocs-workshop/docs/` | Workshop lab documentation (MkDocs Material) |
 
 ---
 
@@ -513,9 +526,9 @@ bash scripts/stacksets/11-deploy-layer2-core.sh
 ```bash
 bash scripts/stacksets/12-deploy-layer3-ai-services.sh
 ```
-- Deploys Bedrock Agent
-- Deploys AgentCore MCP Runtime
-- Deploys AgentCore Agent Runtime
+- Deploys classic Bedrock Agent with Coveo Passage Retrieval tool (action group)
+- Deploys AgentCore MCP Runtime (Coveo Hosted MCP integration)
+- Deploys AgentCore Agent Runtime (Strands-based, memory-enabled)
 - Creates SSM parameters for runtimes
 
 **Step 10: Seed Agent SSM Parameters** (2 minutes)
@@ -584,10 +597,6 @@ The script deploys to multiple accounts in parallel:
 - **StackSet Operations** - Deploys to all accounts simultaneously
 - **Max Concurrent** - 10 accounts at a time (configurable)
 - **Failure Tolerance** - Continues if 5 accounts fail (configurable)
-
----
-
-
 
 ---
 
