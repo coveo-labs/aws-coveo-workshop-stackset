@@ -7,7 +7,6 @@ This page provides detailed architectural information for the Direct Coveo Integ
 ### High-Level Overview
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e8f5e9','primaryTextColor':'#000','primaryBorderColor':'#4caf50','lineColor':'#4caf50','secondaryColor':'#e3f2fd','tertiaryColor':'#fff3e0'}}}%%
 graph TB
     subgraph Frontend["🖥️ Frontend Layer"]
         UI[React Search UI<br/>ECS Express<br/>Port 3003]

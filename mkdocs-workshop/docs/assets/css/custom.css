@@ -215,3 +215,108 @@ table {
     border: 2px solid #9c27b0;
     box-shadow: 0 2px 8px rgba(156, 39, 176, 0.3);
 }
+
+/* Mermaid dark-mode contrast fixes */
+[data-md-color-scheme="slate"] .md-typeset .mermaid .node rect,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .node circle,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .node ellipse,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .node polygon,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .node path,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .classBox,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .note {
+    fill: #1f2937 !important;
+    stroke: #93c5fd !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .mermaid .cluster rect {
+    fill: #111827 !important;
+    stroke: #4b5563 !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .mermaid .edgeLabel rect {
+    fill: #111827 !important;
+    opacity: 0.98 !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .mermaid text,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .label,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .nodeLabel,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .edgeLabel,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .messageText,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .noteText,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .loopText,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .cluster-label,
+[data-md-color-scheme="slate"] .md-typeset .mermaid span {
+    fill: #e5e7eb !important;
+    color: #e5e7eb !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .mermaid line,
+[data-md-color-scheme="slate"] .md-typeset .mermaid path,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .actor-line,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .signal,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .messageLine0,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .messageLine1 {
+    stroke: #9ca3af !important;
+}
+
+/* Dark-mode fixes for markdown sections using inline pastel backgrounds */
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"],
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"],
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"],
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"],
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"],
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] {
+    color: #111827 !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] h1,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] h2,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] h3,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] h4,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] p,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] li,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] small,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e8f5e9"] strong,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] h1,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] h2,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] h3,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] h4,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] p,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] li,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] small,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #e3f2fd"] strong,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] h1,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] h2,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] h3,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] h4,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] p,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] li,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] small,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fff3e0"] strong,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] h1,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] h2,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] h3,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] h4,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] p,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] li,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] small,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f3e5f5"] strong,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] h1,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] h2,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] h3,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] h4,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] p,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] li,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] small,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #fce4ec"] strong,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] h1,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] h2,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] h3,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] h4,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] p,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] li,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] small,
+[data-md-color-scheme="slate"] .md-typeset [style*="background: #f5f5f5"] strong {
+    color: #111827 !important;
+}
