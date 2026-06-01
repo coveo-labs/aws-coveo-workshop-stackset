@@ -238,17 +238,33 @@ table {
     opacity: 0.98 !important;
 }
 
+[data-md-color-scheme="slate"] .md-typeset .mermaid .note,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .note rect,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .noteRect,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .labelBkg {
+    fill: #111827 !important;
+    stroke: #93c5fd !important;
+}
+
 [data-md-color-scheme="slate"] .md-typeset .mermaid text,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .label,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .nodeLabel,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .edgeLabel,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .messageText,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .noteText,
+[data-md-color-scheme="slate"] .md-typeset .mermaid .noteText tspan,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .loopText,
 [data-md-color-scheme="slate"] .md-typeset .mermaid .cluster-label,
 [data-md-color-scheme="slate"] .md-typeset .mermaid span {
     fill: #e5e7eb !important;
     color: #e5e7eb !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .mermaid foreignObject,
+[data-md-color-scheme="slate"] .md-typeset .mermaid foreignObject div,
+[data-md-color-scheme="slate"] .md-typeset .mermaid foreignObject span {
+    color: #e5e7eb !important;
+    fill: #e5e7eb !important;
 }
 
 [data-md-color-scheme="slate"] .md-typeset .mermaid line,

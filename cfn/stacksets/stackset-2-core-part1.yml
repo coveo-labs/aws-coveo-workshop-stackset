@@ -91,8 +91,8 @@ Resources:
         - 'http://localhost:3000'
       PreventUserExistenceErrors: ENABLED
       EnableTokenRevocation: true
-      AccessTokenValidity: 1
-      IdTokenValidity: 1
+      AccessTokenValidity: 5
+      IdTokenValidity: 5
       RefreshTokenValidity: 30
       TokenValidityUnits:
         AccessToken: hours
