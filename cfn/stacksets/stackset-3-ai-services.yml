@@ -223,7 +223,7 @@ Resources:
         - Cite sources with titles and URLs for knowledge answers
         - Keep responses clean and well-formatted
         - Keep all reasoning internal and invisible
-      IdleSessionTTLInSeconds: 600
+      IdleSessionTTLInSeconds: 18000
       AutoPrepare: true
       ActionGroups:
         - ActionGroupName: CoveoPassageRetrieval
