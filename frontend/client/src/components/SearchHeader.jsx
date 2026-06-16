@@ -70,6 +70,7 @@ const SearchInput = styled.input`
   font-size: 16px;
   background: transparent;
   color: #333;
+  min-width: 0;
 
   &::placeholder {
     color: #999;
@@ -95,21 +96,18 @@ const SearchButton = styled(motion.button)`
 `;
 
 const ClearButton = styled(motion.button)`
-  position: absolute;
-  right: 64px;
+  flex-shrink: 0;
   background: none;
   border: none;
   color: #999;
   cursor: pointer;
-  padding: 0;
+  padding: 0 8px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 32px;
   width: 32px;
-  top: 50%;
-  transform: translateY(-50%);
   margin: 0;
 
   &:hover {
@@ -295,8 +293,6 @@ const SearchHeader = ({ onSearch, backendMode, onBackendModeChange, searchQuery,
                   <ClearButton
                     type="button"
                     onClick={handleClear}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
                   >
                     <FiX size={16} />
                   </ClearButton>
