@@ -28,17 +28,24 @@ const LoginScreen = styled.div`
   min-height: 80vh;
   text-align: center;
   color: white;
-  padding: 40px 20px;
+  padding: 40px 16px;
+  overflow-y: auto;
 `;
 
 const LoginCard = styled.div`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   border-radius: 24px;
-  padding: 48px 40px;
+  padding: 40px 32px;
   max-width: 700px;
+  width: 100%;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 28px 20px;
+  }
 `;
 
 const LoginTitle = styled.h1`
@@ -60,6 +67,48 @@ const LoginSubtitle = styled.p`
 const SourcesSection = styled.div`
   margin: 2rem 0;
   text-align: left;
+`;
+
+const SourcesToggle = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.95;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const SourcesToggle = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.95;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const SourcesTitle = styled.h3`
@@ -142,12 +191,16 @@ const LoginButtonStyled = styled.button`
   background: rgba(255, 255, 255, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
-  padding: 16px 32px;
+  padding: 14px 28px;
   font-size: 1.1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  margin: 0 auto;
 
   &:hover {
     background: rgba(255, 255, 255, 0.3);
@@ -578,6 +631,7 @@ function App() {
 // App Content Component that checks authentication
 function AppContent() {
   const { isAuthenticated, loading, login } = useAuth();
+  const [sourcesExpanded, setSourcesExpanded] = useState(false);
 
   if (loading) {
     return (
@@ -597,21 +651,25 @@ function AppContent() {
           </LoginSubtitle>
 
           <SourcesSection>
-            <SourcesTitle>📚 Authoritative Knowledge Sources</SourcesTitle>
-            <SourcesList>
-              <SourceItem>Wikipedia - General financial knowledge</SourceItem>
-              <SourceItem>Investor.gov - Investment basics & alerts</SourceItem>
-              <SourceItem>IRS - Tax information & regulations</SourceItem>
-              <SourceItem>SEC Data - Public company filings and disclosures</SourceItem>
-              <SourceItem>NCUA - Credit union information</SourceItem>
-              <SourceItem>FinCEN - Financial crimes enforcement</SourceItem>
-              <SourceItem>CFPB - Consumer Financial Protection Bureau</SourceItem>
-              <SourceItem>FDIC - Federal Deposit Insurance Corporation</SourceItem>
-              <SourceItem>FRB - Federal Reserve Board</SourceItem>
-              <SourceItem>OCC - Office of the Comptroller of the Currency</SourceItem>
-              <SourceItem>MyMoney.gov - Financial literacy resources</SourceItem>
-              <SourceItem>FTC - Federal Trade Commission</SourceItem>
-            </SourcesList>
+            <SourcesToggle onClick={() => setSourcesExpanded(prev => !prev)}>
+              📚 Authoritative Knowledge Sources {sourcesExpanded ? '▲' : '▼'}
+            </SourcesToggle>
+            {sourcesExpanded && (
+              <SourcesList>
+                <SourceItem>Wikipedia - General financial knowledge</SourceItem>
+                <SourceItem>Investor.gov - Investment basics &amp; alerts</SourceItem>
+                <SourceItem>IRS - Tax information &amp; regulations</SourceItem>
+                <SourceItem>SEC Data - Public company filings and disclosures</SourceItem>
+                <SourceItem>NCUA - Credit union information</SourceItem>
+                <SourceItem>FinCEN - Financial crimes enforcement</SourceItem>
+                <SourceItem>CFPB - Consumer Financial Protection Bureau</SourceItem>
+                <SourceItem>FDIC - Federal Deposit Insurance Corporation</SourceItem>
+                <SourceItem>FRB - Federal Reserve Board</SourceItem>
+                <SourceItem>OCC - Office of the Comptroller of the Currency</SourceItem>
+                <SourceItem>MyMoney.gov - Financial literacy resources</SourceItem>
+                <SourceItem>FTC - Federal Trade Commission</SourceItem>
+              </SourcesList>
+            )}
           </SourcesSection>
 
           <BackendModesSection>
