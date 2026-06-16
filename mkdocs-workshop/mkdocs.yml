@@ -1,10 +1,10 @@
 site_name: Coveo + AWS Workshop
 site_description: Hands-on workshop demonstrating Coveo direct APIs, AgentCore with Hosted MCP, and native Coveo Search Agent experiences
 site_author: Coveo
-site_url: https://kpullagu.github.io/aws-coveo-workshop-stackset/
+site_url: https://coveo-labs.github.io/aws-coveo-workshop-stackset/
 
 repo_name: aws-coveo-workshop-stackset
-repo_url: https://github.com/kpullagu/aws-coveo-workshop-stackset
+repo_url: https://github.com/coveo-labs/aws-coveo-workshop-stackset
 
 theme:
   name: material
@@ -94,7 +94,7 @@ extra_javascript:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/kpullagu/aws-coveo-workshop-stackset
+      link: https://github.com/coveo-labs/aws-coveo-workshop-stackset
     - icon: fontawesome/solid/globe
       link: https://www.coveo.com
 
