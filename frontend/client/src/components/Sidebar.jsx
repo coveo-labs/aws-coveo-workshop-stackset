@@ -298,12 +298,10 @@ const Sidebar = ({ facets, selectedFacets, onFacetChange, onClearFilters, totalR
     if (field === 'documenttype') {
       return value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }
-    if (field === 'project') {
-      return value.charAt(0).toUpperCase() + value.slice(1);
-    }
     if (field === 'filetype') {
       return value.toUpperCase();
     }
+    // Return original casing for all other fields (preserves CFPB, FTC, FDIC, etc.)
     return value;
   };
 

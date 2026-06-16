@@ -192,8 +192,9 @@ Expected:
 
 1. Note the session ID suffix shown in the chatbot footer.
 2. Refresh the browser.
-3. Reopen the chatbot and confirm the same session ID suffix is shown.
-4. Ask:
+3. Select **Coveo Hosted MCP Agent** from the backend selector.
+4. Reopen the chatbot and confirm the same session ID suffix is shown.
+5. Ask:
 
 ```text
 What was my previous question?
